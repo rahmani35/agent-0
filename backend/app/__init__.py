@@ -1,0 +1,2 @@
+"""FastAPI Gateway application package.
+"""
