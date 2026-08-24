@@ -27,7 +27,6 @@ deploy-agent:
 deploy-backend:
 	gcloud run deploy agent-backend \
 		--source . \
-		--dockerfile backend/Dockerfile \
 		--project learn-agent-deployment \
 		--region europe-west3 \
 		--allow-unauthenticated
