@@ -141,13 +141,15 @@ async def summarize(
         f"Please summarize the following text in {request.style}:\n\n"
         f"\"\"\"\n{request.text}\n\"\"\""
     )
+    # Summarizing is a one-shot task: without an explicit session_id there is no
+    # conversation to continue, so let the Agent Engine run it statelessly.
     session_id = request.session_id or f"summary_{os.urandom(4).hex()}"
-    
+
     try:
         response_text = await execute_agent_query(
             prompt=prompt,
             user_id=current_user.email,
-            session_id=session_id,
+            session_id=request.session_id,
         )
         return AgentResponse(
             response=response_text,
@@ -171,13 +173,14 @@ async def solve_math(
         f"Please solve this math problem: {request.problem}\n"
         f"Instructions: {'Show all steps clearly and state the final answer.' if request.show_steps else 'Provide the final solution directly.'}"
     )
+    # One-shot task; only continue a conversation if the caller named a session.
     session_id = request.session_id or f"math_{os.urandom(4).hex()}"
-    
+
     try:
         response_text = await execute_agent_query(
             prompt=prompt,
             user_id=current_user.email,
-            session_id=session_id,
+            session_id=request.session_id,
         )
         return AgentResponse(
             response=response_text,

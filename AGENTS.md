@@ -31,8 +31,6 @@ agent-0/
 │   │   ├── auth.py         # Google OAuth ID token verification & whitelist
 │   │   ├── engine.py       # Vertex AI Agent Engine streaming client
 │   │   └── config.py       # Configuration & environment variable loader
-│   ├── Dockerfile          # Production container for Google Cloud Run
-│   ├── .dockerignore
 │   └── requirements.txt    # Gateway server dependencies
 │
 ├── frontend/               # 🌐 React 18 SPA
@@ -46,6 +44,11 @@ agent-0/
 │   ├── vite.config.js
 │   └── .env                # VITE_GOOGLE_CLIENT_ID & VITE_API_URL
 │
+├── Dockerfile              # Gateway container for Cloud Run. MUST stay at the repo
+│                           # root: `gcloud run deploy --source .` only builds a
+│                           # Dockerfile found at the root of the source dir, and
+│                           # its COPY paths assume a root build context.
+├── .dockerignore           # Trims the root build context (frontend, .venv, .git)
 ├── firebase.json           # Firebase Hosting configuration (points to frontend/dist)
 ├── .firebaserc             # Firebase GCP project target
 ├── .env.example            # Monorepo environment variable template
