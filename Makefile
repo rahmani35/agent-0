@@ -3,7 +3,7 @@
 help:
 	@echo "Agent-0 Monorepo Management Commands:"
 	@echo "  make dev-backend     - Run FastAPI Gateway server locally (Port 8083)"
-	@echo "  make dev-frontend    - Run React Vite dev server (Port 5174)"
+	@echo "  make dev-frontend    - Run React Vite dev server (Port 5173)"
 	@echo "  make test-agent      - Test remote Vertex AI Agent Engine with sample prompt"
 	@echo "  make deploy-agent    - Deploy ADK Agent to Vertex AI Agent Engine"
 	@echo "  make deploy-backend  - Deploy Gateway to Google Cloud Run"
