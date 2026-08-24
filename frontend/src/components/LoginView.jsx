@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Bot, ShieldCheck, AlertCircle, Sparkles } from 'lucide-react';
+import { Bot, ShieldCheck, AlertCircle, Sparkles, Tag } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
+
+// Injected at build time by vite.config.js (`define`).
+const APP_VERSION = typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : '0.0.0';
+const BUILD_SHA = typeof __BUILD_SHA__ === 'string' ? __BUILD_SHA__ : 'dev';
 
 export default function LoginView() {
   const { loginWithGoogle } = useAuth();
@@ -103,6 +107,12 @@ export default function LoginView() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.75rem' }}>
             <Sparkles size={14} color="var(--accent-purple)" />
             <span>Connected to Region: europe-west3</span>
+          </div>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-muted)', fontSize: '0.75rem' }}>
+            <Tag size={14} />
+            <span>
+              Version {APP_VERSION} <span style={{ opacity: 0.6 }}>· build {BUILD_SHA}</span>
+            </span>
           </div>
         </div>
       </div>
